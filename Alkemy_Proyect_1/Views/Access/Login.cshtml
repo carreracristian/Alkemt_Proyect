@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+
+        <h1>LOGIN</h1>
+
+        <form action="@Url.Content("~/Access/Login")" method="post">
+            <p>
+                If you are a student enter ID followed by your docket, if you are an administrator enter your name and ID
+            </p>
+            <input type="text" id="login" class="fadeIn second" name="User"><br /><br />
+            <input type="password" id="password" class="fadeIn third" name="Pass">
+            <input type="submit" class="fadeIn fourth" value="Login">
+        </form>
+    </div>
+</div>

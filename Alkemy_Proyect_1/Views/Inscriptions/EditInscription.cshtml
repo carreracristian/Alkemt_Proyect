@@ -1,0 +1,30 @@
+﻿@model Alkemy_Proyect_1.Models.ViewModels.AddInscriptionsViewModel
+@{
+    ViewBag.Title = "EDIT Student";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("EditInscription", "Inscriptions", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.Id)
+            <div>
+                @Html.LabelFor(d => d.Id_student)
+                @Html.TextBoxFor(d => d.Id_student, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Id_student, null, new { @style = "color:red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Id_subject)
+                @Html.TextBoxFor(d => d.Id_subject, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Id_subject, null, new { @style = "color:red" })
+            </div>
+            <br />
+            <div style="text-align:right;">
+                <input type="submit" value="SEND" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}

@@ -1,0 +1,42 @@
+﻿@model List<Alkemy_Proyect_1.Models.ViewModels.ListSubjectsViewModel>
+@{
+    ViewBag.Title = "List of Subjects";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row" style="text-align:right;padding:5px;">
+    <a href="~/Subjects/AddNewSubject" class="btn btn-primary">ADD NEW </a>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @ViewData["cuposLlenos"]
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Schedule</th>
+                <th>Description</th>
+                <th>Capacity</th>
+                <th>Teacher Name</th>
+            </tr>
+            @foreach (var index in Model)
+            {
+            <tr>
+                <td>@index.Id</td>
+                <td>@index.Name</td>
+                <td>@index.Schedule</td>
+                <td>@index.Description</td>
+                <td>@index.NumberOfStudents</td>
+                <td>@index.NameOfTeacher</td>
+                <td>
+                    <a class="btn btn-default" href="~/Subjects/EditSubject/@index.Id">EDIT</a>
+                    <a class="btn btn-danger" href="~/Subjects/DeleteSubject/@index.Id">DELETE</a>
+                    <a class="btn btn-primary" href="~/Students/Register/@index.Id">REGISTER</a>
+                </td>
+            </tr>
+            }
+        </table>
+
+    </div>
+</div>

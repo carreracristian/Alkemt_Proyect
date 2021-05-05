@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6c7399242f3244b7a8f1920bf7e8e0b3" Name="Diagram1">
+        <EntityTypeShape EntityType="Alkemy_ProyectModel.Inscriptions" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Alkemy_ProyectModel.Roles" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Alkemy_ProyectModel.Subject" Width="1.5" PointX="3.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Alkemy_ProyectModel.Teachers" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Alkemy_ProyectModel.Users2" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="Alkemy_ProyectModel.FK__Inscripti__Id_st__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="Alkemy_ProyectModel.FK__Inscripti__Id_su__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="Alkemy_ProyectModel.FK_Inscriptions_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="Alkemy_ProyectModel.FK__Users2__Id_rol__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="Alkemy_ProyectModel.FK__Subject__Id_teac__3B75D760" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Alkemy_ProyectModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin_Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dni" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Inscriptions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_student" Type="Int32" Nullable="false" />
+    <Property Name="Id_subject" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Inscripti__Id_st__2D27B809" FromRole="Inscriptions" ToRole="Students" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Inscripti__Id_su__3C69FB99" FromRole="Inscriptions" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Docket" Type="Int32" Nullable="false" />
+    <Property Name="Dni" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Inscriptions" Relationship="Self.FK__Inscripti__Id_st__2D27B809" FromRole="Students" ToRole="Inscriptions" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Schedule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Id_teacher" Type="Int32" />
+    <Property Name="Number_of_stufrnts" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Inscriptions" Relationship="Self.FK__Inscripti__Id_su__3C69FB99" FromRole="Subject" ToRole="Inscriptions" />
+    <NavigationProperty Name="Teachers" Relationship="Self.FK__Subject__Id_teac__3B75D760" FromRole="Subject" ToRole="Teachers" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dni" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Subject__Id_teac__3B75D760" FromRole="Teachers" ToRole="Subject" />
+  </EntityType>
+  <Association Name="FK__Inscripti__Id_st__2D27B809">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inscriptions">
+        <PropertyRef Name="Id_student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inscripti__Id_su__3C69FB99">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inscriptions">
+        <PropertyRef Name="Id_subject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Subject__Id_teac__3B75D760">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+    <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subject">
+        <PropertyRef Name="Id_teacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Alkemy_Proyect_Entities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin_Users" EntityType="Self.Admin_Users" />
+    <EntitySet Name="Inscriptions" EntityType="Self.Inscriptions" />
+    <EntitySet Name="Students" EntityType="Self.Students" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" />
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" />
+    <AssociationSet Name="FK__Inscripti__Id_st__2D27B809" Association="Self.FK__Inscripti__Id_st__2D27B809">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Inscriptions" EntitySet="Inscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inscripti__Id_su__3C69FB99" Association="Self.FK__Inscripti__Id_su__3C69FB99">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Inscriptions" EntitySet="Inscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Subject__Id_teac__3B75D760" Association="Self.FK__Subject__Id_teac__3B75D760">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Subject" EntitySet="Subject" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

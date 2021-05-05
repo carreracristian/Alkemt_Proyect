@@ -1,0 +1,45 @@
+﻿@model Alkemy_Proyect_1.Models.ViewModels.AddSubjectsViewModel
+@{
+    ViewBag.Title = "EDIT SUBJECT";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("EditSubject", "Subjects", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.Id)
+            <div>
+                @Html.LabelFor(d => d.Name)
+                @Html.TextBoxFor(d => d.Name, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Name, null, new { @style = "color:red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Schedule)
+                @Html.TextBoxFor(d => d.Schedule, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Schedule, null, new { @style = "color:red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.IdOfTeacher)
+                @Html.TextBoxFor(d => d.IdOfTeacher, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.IdOfTeacher, null, new { @style = "color:red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.NumberOfStudents)
+                @Html.TextBoxFor(d => d.NumberOfStudents, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.NumberOfStudents, null, new { @style = "color:red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Description)
+                @Html.TextBoxFor(d => d.Description, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Description, null, new { @style = "color:red" })
+            </div>
+            <br />
+            <div style="text-align:right;">
+                <input type="submit" value="SEND" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}
