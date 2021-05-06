@@ -186,16 +186,25 @@ namespace Alkemy_Proyect_1.Controllers
 
                     throw new Exception(ex.Message);
                 }
-        }
-        [AuthorizeUser(idRole: 1)]
-        public ActionResult DeleteSubject(int id)
+            }
+            [AuthorizeUser(idRole: 1)]
+            public ActionResult DeleteSubject(int id)
             {
-                using (Alkemy_ProyectEntities6 db = new Alkemy_ProyectEntities6())
+                try
                 {
-                    var deleteFile = db.Subject.Find(id);
-                    db.Subject.Remove(deleteFile);
-                    db.SaveChanges();
+                    using (Alkemy_ProyectEntities6 db = new Alkemy_ProyectEntities6())
+                    {
+                        var deleteFile = db.Subject.Find(id);
+                        db.Subject.Remove(deleteFile);
+                        db.SaveChanges();
+                    }
                 }
+                catch (Exception)
+                {
+
+                    return Redirect("/Alert/Create");
+                }
+                
                 return Redirect("/Subjects/");
             }
         

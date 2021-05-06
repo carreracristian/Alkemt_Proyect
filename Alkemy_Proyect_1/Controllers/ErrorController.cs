@@ -17,5 +17,10 @@ namespace Alkemy_Proyect_1.Controllers
             ViewBag.msjeErrorExcepcion = msjeErrorExcepcion;
             return View();
         }
+        public ActionResult DeleteTeacher()
+        {
+            ViewBag.msjeErrorExcepcion = "Debe eliminar la materia asignada para el profesro primero";
+            return View();
+        }
     }
 }

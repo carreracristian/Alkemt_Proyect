@@ -170,25 +170,6 @@ namespace Alkemy_Proyect_1.Controllers
                         ViewData["cuposLlenos"] = "No space for registration";
                     }
                 }
-                /*if (!(lstInscriptions.Contains(newInscription)))
-                {
-                    foreach (var item2 in lstSubject)
-                    {
-                        if (item2.Id == newInscription.Id_subject)
-                        {
-                            capacity = (int)item2.Number_of_stufrnts--;
-                        }
-                    }
-                    if (capacity > 0)
-                    {
-                        db.Inscriptions.Add(newInscription);
-                        db.SaveChanges();
-                    }
-                    else
-                    {
-                        ViewData["cuposLlenos"] = "No space for registration";
-                    }
-                }*/
             }
 
             return Redirect("/Students/MyInscriptions/");
@@ -198,12 +179,21 @@ namespace Alkemy_Proyect_1.Controllers
         [AuthorizeUser(idRole: 1)]
         public ActionResult DeleteStudent(int id)
         {
-            using (Alkemy_ProyectEntities6 db = new Alkemy_ProyectEntities6())
+            try
             {
-                var deleteFile = db.Users2.Find(id);
-                db.Users2.Remove(deleteFile);
-                db.SaveChanges();
+                using (Alkemy_ProyectEntities6 db = new Alkemy_ProyectEntities6())
+                {
+                    var deleteFile = db.Users2.Find(id);
+                    db.Users2.Remove(deleteFile);
+                    db.SaveChanges();
+                }
             }
+            catch (Exception)
+            {
+
+                return Redirect("/Alert/Create");
+            }
+            
             return Redirect("/Students/Index");
         }
         public ActionResult MyInscriptions()

@@ -1,11 +1,11 @@
-﻿@{
-    ViewBag.Title = "UnauthorizedOperation";
+﻿{
+    ViewBag.Title = "DELETE TEACHER ERROR";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="content-header">
     <h1>
-        Error, no tienes permiso
+        Error, CANT DELETE THE TEACHER
     </h1>
 </section>
 <section class="content">
@@ -17,7 +17,7 @@
             {
                 <p>Operación @ViewBag.operacion </p>
             }
-            <a href="~/Views/Error/UnauthorizedOperation.cshtml">~/Views/Error/UnauthorizedOperation.cshtml</a>
+        <a href="~/Views/Error/DeleteTeacher.cshtml">~/Views/Error/DeleteTeacher.cshtml</a>
             @if (ViewBag.modulo != "")
             {
                 <p>Modulo @ViewBag.modulo</p>

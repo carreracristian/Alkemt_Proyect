@@ -127,12 +127,20 @@ namespace Alkemy_Proyect_1.Controllers
         [AuthorizeUser(idRole: 1)]
         public ActionResult Delete(int id)
         {
-            using (Alkemy_ProyectEntities6 db = new Alkemy_ProyectEntities6())
+            try
             {
-                var deleteFile = db.Teachers.Find(id);
-                db.Teachers.Remove(deleteFile);
-                db.SaveChanges();
+                using (Alkemy_ProyectEntities6 db = new Alkemy_ProyectEntities6())
+                {
+                    var deleteFile = db.Teachers.Find(id);
+                    db.Teachers.Remove(deleteFile);
+                    db.SaveChanges();
+                }
             }
+            catch(Exception ex)
+            {
+                return Redirect("/Alert/Create");
+            }
+            
             return Redirect("/Teachers/");
         }
     }
