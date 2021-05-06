@@ -9,12 +9,9 @@
                 <h1>@ViewBag.Title</h1>
 
                 <form action="@Url.Content("~/Access/Login")" method="post">
-                    <p>
-                        If you are a student enter ID followed by your docket, if you are an administrator enter your name and ID
-                    </p>
                     <input type="text" id="login" class="fadeIn second" name="User"><br /><br />
-                    <input type="password" id="password" class="fadeIn third" name="Pass">
-                    <input type="submit" class="fadeIn fourth" value="Login">
+                    <input type="password" id="password" class="fadeIn third" name="Pass"><br /><br />
+                    <input type="submit" class="btn btn-primary" value="LOGIN">
                 </form>
             </div>
     </div>
