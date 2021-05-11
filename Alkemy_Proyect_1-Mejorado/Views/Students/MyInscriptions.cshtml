@@ -1,0 +1,32 @@
+﻿@model List<Alkemy_Proyect_1.Models.ViewModels.ListInscriptionsViewModel>
+@{
+    ViewBag.Title = "MY SUBJECTS";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Student</th>
+                <th>Teacher</th>
+                <th>Subject</th>
+                <th>Schedule</th>
+            </tr>
+            @foreach (var index in Model)
+            {
+                <tr>
+                    <td>@index.Id</td>
+                    <td>@index.StudentName</td>
+                    <td>@index.TeacherName</td>
+                    <td>@index.SubjectName</td>
+                    <td>@index.ScheduleSubject</td>
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>
+

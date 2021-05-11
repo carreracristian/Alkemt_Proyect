@@ -1,0 +1,39 @@
+﻿@model Alkemy_Proyect_1.Models.ViewModels.AddTeachersViewModels
+@{
+    ViewBag.Title = "ADD NEW TEACHER";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("AddNew", "Teachers", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.Name)
+                @Html.TextBoxFor(d => d.Name, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Name, null, new { @style = "color:red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Lastname)
+                @Html.TextBoxFor(d => d.Lastname, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Lastname, null, new { @style = "color:red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Dni)
+                @Html.TextBoxFor(d => d.Dni, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Dni, null, new { @style = "color:red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Active)
+                @Html.TextBoxFor(d => d.Active, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Active, null, new { @style = "color:red" })
+            </div>   
+            <br />
+            <div style="text-align:right;">
+                <input type="submit" value="SEND" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+}

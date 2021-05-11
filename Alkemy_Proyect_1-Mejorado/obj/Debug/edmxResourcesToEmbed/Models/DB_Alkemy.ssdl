@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Alkemy_ProyectModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin_Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Dni" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Inscriptions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_student" Type="int" Nullable="false" />
+    <Property Name="Id_subject" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Docket" Type="int" Nullable="false" />
+    <Property Name="Dni" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Schedule" Type="varchar" MaxLength="50" />
+    <Property Name="Id_teacher" Type="int" />
+    <Property Name="Number_of_stufrnts" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Dni" Type="int" Nullable="false" />
+    <Property Name="Active" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Inscripti__Id_st__2D27B809">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inscriptions">
+        <PropertyRef Name="Id_student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inscripti__Id_su__3C69FB99">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inscriptions">
+        <PropertyRef Name="Id_subject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Subject__Id_teac__3B75D760">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+    <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subject">
+        <PropertyRef Name="Id_teacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Alkemy_ProyectModel2StoreContainer">
+    <EntitySet Name="Admin_Users" EntityType="Self.Admin_Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inscriptions" EntityType="Self.Inscriptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Inscripti__Id_st__2D27B809" Association="Self.FK__Inscripti__Id_st__2D27B809">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Inscriptions" EntitySet="Inscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inscripti__Id_su__3C69FB99" Association="Self.FK__Inscripti__Id_su__3C69FB99">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Inscriptions" EntitySet="Inscriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Subject__Id_teac__3B75D760" Association="Self.FK__Subject__Id_teac__3B75D760">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Subject" EntitySet="Subject" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

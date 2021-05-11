@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Alkemy_ProyectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Inscriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_student" Type="int" Nullable="false" />
+          <Property Name="Id_subject" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Schedule" Type="varchar" MaxLength="50" />
+          <Property Name="Id_teacher" Type="int" />
+          <Property Name="Number_of_stufrnts" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Teachers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dni" Type="int" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dni" Type="int" Nullable="false" />
+          <Property Name="Docket" Type="int" Nullable="false" />
+          <Property Name="Id_rol" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Inscripti__Id_st__5DCAEF64">
+          <End Role="Users2" Type="Self.Users2" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users2">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="Id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripti__Id_su__5FB337D6">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="Id_subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subject__Id_teac__3B75D760">
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="Id_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users2__Id_rol__5CD6CB2B">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users2" Type="Self.Users2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users2">
+              <PropertyRef Name="Id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inscriptions_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="Id_subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Alkemy_ProyectModelStoreContainer">
+          <EntitySet Name="Inscriptions" EntityType="Self.Inscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users2" EntityType="Self.Users2" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Inscripti__Id_st__5DCAEF64" Association="Self.FK__Inscripti__Id_st__5DCAEF64">
+            <End Role="Users2" EntitySet="Users2" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripti__Id_su__5FB337D6" Association="Self.FK__Inscripti__Id_su__5FB337D6">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subject__Id_teac__3B75D760" Association="Self.FK__Subject__Id_teac__3B75D760">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users2__Id_rol__5CD6CB2B" Association="Self.FK__Users2__Id_rol__5CD6CB2B">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users2" EntitySet="Users2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inscriptions_Subject" Association="Self.FK_Inscriptions_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Alkemy_ProyectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Inscriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_student" Type="Int32" Nullable="false" />
+          <Property Name="Id_subject" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users2" Relationship="Self.FK__Inscripti__Id_st__5DCAEF64" FromRole="Inscriptions" ToRole="Users2" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK__Inscripti__Id_su__5FB337D6" FromRole="Inscriptions" ToRole="Subject" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK_Inscriptions_Subject" FromRole="Inscriptions" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users2" Relationship="Self.FK__Users2__Id_rol__5CD6CB2B" FromRole="Roles" ToRole="Users2" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Schedule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_teacher" Type="Int32" />
+          <Property Name="Number_of_stufrnts" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Inscriptions" Relationship="Self.FK__Inscripti__Id_su__5FB337D6" FromRole="Subject" ToRole="Inscriptions" />
+          <NavigationProperty Name="Inscriptions1" Relationship="Self.FK_Inscriptions_Subject" FromRole="Subject" ToRole="Inscriptions" />
+          <NavigationProperty Name="Teachers" Relationship="Self.FK__Subject__Id_teac__3B75D760" FromRole="Subject" ToRole="Teachers" />
+        </EntityType>
+        <EntityType Name="Teachers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dni" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK__Subject__Id_teac__3B75D760" FromRole="Teachers" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Users2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dni" Type="Int32" Nullable="false" />
+          <Property Name="Docket" Type="Int32" Nullable="false" />
+          <Property Name="Id_rol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inscriptions" Relationship="Self.FK__Inscripti__Id_st__5DCAEF64" FromRole="Users2" ToRole="Inscriptions" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Users2__Id_rol__5CD6CB2B" FromRole="Users2" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK__Inscripti__Id_st__5DCAEF64">
+          <End Role="Users2" Type="Self.Users2" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users2">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="Id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inscripti__Id_su__5FB337D6">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="Id_subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inscriptions_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Inscriptions" Type="Self.Inscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inscriptions">
+              <PropertyRef Name="Id_subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users2__Id_rol__5CD6CB2B">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users2" Type="Self.Users2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users2">
+              <PropertyRef Name="Id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subject__Id_teac__3B75D760">
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="Id_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Alkemy_ProyectEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Inscriptions" EntityType="Self.Inscriptions" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" />
+          <EntitySet Name="Teachers" EntityType="Self.Teachers" />
+          <EntitySet Name="Users2" EntityType="Self.Users2" />
+          <AssociationSet Name="FK__Inscripti__Id_st__5DCAEF64" Association="Self.FK__Inscripti__Id_st__5DCAEF64">
+            <End Role="Users2" EntitySet="Users2" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inscripti__Id_su__5FB337D6" Association="Self.FK__Inscripti__Id_su__5FB337D6">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inscriptions_Subject" Association="Self.FK_Inscriptions_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Inscriptions" EntitySet="Inscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users2__Id_rol__5CD6CB2B" Association="Self.FK__Users2__Id_rol__5CD6CB2B">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users2" EntitySet="Users2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subject__Id_teac__3B75D760" Association="Self.FK__Subject__Id_teac__3B75D760">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Alkemy_ProyectModelStoreContainer" CdmEntityContainer="Alkemy_ProyectEntities6">
+          <EntitySetMapping Name="Inscriptions">
+            <EntityTypeMapping TypeName="Alkemy_ProyectModel.Inscriptions">
+              <MappingFragment StoreEntitySet="Inscriptions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_student" ColumnName="Id_student" />
+                <ScalarProperty Name="Id_subject" ColumnName="Id_subject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Alkemy_ProyectModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subject">
+            <EntityTypeMapping TypeName="Alkemy_ProyectModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Schedule" ColumnName="Schedule" />
+                <ScalarProperty Name="Id_teacher" ColumnName="Id_teacher" />
+                <ScalarProperty Name="Number_of_stufrnts" ColumnName="Number_of_stufrnts" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="Alkemy_ProyectModel.Teachers">
+              <MappingFragment StoreEntitySet="Teachers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Dni" ColumnName="Dni" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users2">
+            <EntityTypeMapping TypeName="Alkemy_ProyectModel.Users2">
+              <MappingFragment StoreEntitySet="Users2">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Dni" ColumnName="Dni" />
+                <ScalarProperty Name="Docket" ColumnName="Docket" />
+                <ScalarProperty Name="Id_rol" ColumnName="Id_rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
